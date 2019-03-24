@@ -4,7 +4,7 @@ from time import sleep
 from DbConnection import DbConnection
 from mySwitch import MySwitch
 
-DEVICE_NAME = "Testdevice"
+DEVICE_NAME = "3E0B80"
 DEVICE_IP = "192.168.1.52"
 
 current_milli_time = lambda: int(round(time.time() * 1000))

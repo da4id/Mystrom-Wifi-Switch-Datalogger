@@ -1,6 +1,6 @@
 {
-  "server" : "database server",
-  "user": "mysql username",
-  "passwd": "mysql user password",
-  "database": "mysql Database"
+  "server" : "davidzingg.ch",
+  "user": "mystromUser",
+  "passwd": "114Ah0FckpLPzh7DE7Ah",
+  "database": "mystromDb"
 }
