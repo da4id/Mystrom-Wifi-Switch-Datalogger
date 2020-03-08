@@ -1,11 +1,12 @@
 import mysql.connector
 import json
-
+import logging
 
 class DbConnection:
     def __init__(self):
         self.dbConnection = self.createDbConnection()
         self.cursor = self.createDbCursor()
+        self.logger = logging.getLogger(__name__)
 
     def createDbConnection(self):
         with open('config.json') as json_data:
@@ -46,6 +47,7 @@ class DbConnection:
         return self.cursor.lastrowid
 
     def createMeasurement(self, dbIdSeries, currentPower, energy, dT):
+        self.logger.debug("publish: "+str(currentPower)+"W, "+str(energy)+"Wh")
         sql = "INSERT INTO Measurements (dbIdSeries, CurrentPower, Energy,deltaT) VALUES (%s,%s,%s,%s)"
         val = (dbIdSeries, currentPower, energy, dT)
 
