@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="71e5a729-cf59-4230-b3a0-e138f8a85a1c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Python/MqttReceiver.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python/ShellyMqttAdapter.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python/ShellyReceiver.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Python/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Python/DbConnection.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/DbConnection.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/venv/lib64" beforeDir="false" afterPath="$PROJECT_DIR$/Python/venv/lib64" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/ShellyMqttAdapter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/ShellyMqttAdapter.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -107,6 +103,14 @@
       <option name="presentableId" value="Default" />
       <updated>1553287921673</updated>
     </task>
+    <task id="LOCAL-00001" summary="Support Shelly1PM">
+      <created>1583678876054</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1583678876054</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -121,5 +125,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Support Shelly1PM" />
+    <option name="LAST_COMMIT_MESSAGE" value="Support Shelly1PM" />
   </component>
 </project>

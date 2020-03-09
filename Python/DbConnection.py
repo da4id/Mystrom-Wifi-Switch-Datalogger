@@ -1,6 +1,8 @@
-import mysql.connector
 import json
 import logging
+
+import mysql.connector
+
 
 class DbConnection:
     def __init__(self):
@@ -47,9 +49,12 @@ class DbConnection:
         return self.cursor.lastrowid
 
     def createMeasurement(self, dbIdSeries, currentPower, energy, dT):
-        self.logger.debug("publish: "+str(currentPower)+"W, "+str(energy)+"Wh")
+        self.logger.debug("publish: " + str(currentPower) + "W, " + str(energy) + "Wh")
         sql = "INSERT INTO Measurements (dbIdSeries, CurrentPower, Energy,deltaT) VALUES (%s,%s,%s,%s)"
         val = (dbIdSeries, currentPower, energy, dT)
 
         self.cursor.execute(sql, val)
         self.dbConnection.commit()
+
+    def close(self):
+        self.dbConnection.close()

@@ -23,7 +23,9 @@ class ShellyMqttAdapter(MqttReceiver):
 
     def checkAndLog(self):
         if self.lastEnergy is not None and self.lastPower is not None:
-            self.dbConnection.createMeasurement(self.dbIdSeries, self.lastPower, self.lastEnergy, 1)
+            dbConnection = DbConnection()
+            dbConnection.createMeasurement(self.dbIdSeries, self.lastPower, self.lastEnergy, 1)
+            dbConnection.close()
             self.lastPower = None
             self.lastEnergy = None
 
@@ -37,12 +39,14 @@ class ShellyMqttAdapter(MqttReceiver):
         self.checkAndLog()
 
     def run(self, username, password, server, port, powerTopic, energyTopic, deviceName):
-        self.dbConnection = DbConnection()
-        self.dbIdTestDevice = self.dbConnection.findDataloggerDbIdByName(deviceName)
+        dbConnection = DbConnection()
+        self.dbIdTestDevice = dbConnection.findDataloggerDbIdByName(deviceName)
         print("Device dbId", self.dbIdTestDevice)
 
-        self.dbIdSeries = self.dbConnection.createNewSeries(self.dbIdTestDevice)
+        self.dbIdSeries = dbConnection.createNewSeries(self.dbIdTestDevice)
         print("Series dbId", self.dbIdSeries)
+
+        dbConnection.close()
 
         self.superRun(username, password, server, port, powerTopic)
         self.subscribe(energyTopic, 0)
