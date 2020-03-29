@@ -201,7 +201,7 @@ $lastEntry = getLastEntry($pdo,$dbIdSeries);
     <!--- Panel mit Charts --->
     <div class="panel panel-default">
         <div class="panel-heading" id="lastUpdate">
-            Verbrauchswerte - Gesamtverbrauch: <?php echo number_format($lastEntry["Energy"]/1000, 3, '.', ','); ?> kWh
+            Verbrauchswerte - Gesamtverbrauch: <?php echo number_format($lastEntry["Energy"], 3, '.', ','); ?> kWh
         </div>
         <div class="panel-body">
             <!-- HTML -->

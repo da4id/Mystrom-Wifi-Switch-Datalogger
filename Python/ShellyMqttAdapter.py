@@ -5,9 +5,6 @@ import paho.mqtt.client as mqtt
 from DbConnection import DbConnection
 from MqttReceiver import MqttReceiver
 
-TimeTopic = "datalogger/time"
-TimeStampPublishIntervall = 5
-
 
 class ShellyMqttAdapter(MqttReceiver):
 
@@ -23,9 +20,12 @@ class ShellyMqttAdapter(MqttReceiver):
 
     def checkAndLog(self):
         if self.lastEnergy is not None and self.lastPower is not None:
-            dbConnection = DbConnection()
-            dbConnection.createMeasurement(self.dbIdSeries, self.lastPower, self.lastEnergy, 1)
-            dbConnection.close()
+            try:
+                dbConnection = DbConnection()
+                dbConnection.createMeasurement(self.dbIdSeries, self.lastPower, self.lastEnergy, 1)
+                dbConnection.close()
+            except Exception as e:
+                self.logger.warning(e)
             self.lastPower = None
             self.lastEnergy = None
 
