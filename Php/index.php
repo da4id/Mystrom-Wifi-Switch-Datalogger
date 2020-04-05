@@ -6,10 +6,11 @@ $displayEndDate = date("d.m.Y H:i:s", time());
 include 'logData.php';
 
 $pdo = createPDO();
+$latestSeries = getLatestSeries($pdo)[0];
 $loggers = getDataLoggers($pdo);
 
 if (!isset($_GET)) {
-    $loggerId = $loggers[0]["dbId"];
+    $loggerId = $latestSeries["dbIdDatalogger"];
 } else {
     if (isset($_GET["datalogger"])) {
         $loggerId = $_GET["datalogger"];
@@ -20,10 +21,10 @@ if (!isset($_GET)) {
             }
         }
         if ($foundLogger == false) {
-            $loggerId = $loggers[0]["dbId"];
+            $loggerId = $latestSeries["dbIdDatalogger"];;
         }
     } else {
-        $loggerId = $loggers[0]["dbId"];
+        $loggerId = $latestSeries["dbIdDatalogger"];;
     }
 }
 

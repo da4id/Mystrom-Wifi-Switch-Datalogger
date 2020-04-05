@@ -1,0 +1,26 @@
+2020-03-08 15:08:27,990 - ShellyMqttAdapter - INFO - Connect to MqTT Broker
+2020-03-08 15:08:27,992 - ShellyMqttAdapter - INFO - Subscribed: 1 (0,)
+2020-03-08 15:08:27,993 - ShellyMqttAdapter - INFO - Subscribed: 2 (0,)
+2020-03-08 15:08:49,692 - ShellyMqttAdapter - ERROR - Caught exception in on_message: invalid literal for int() with base 10: "b'0.00'"
+2020-03-08 15:08:49,694 - ShellyMqttAdapter - ERROR - Caught exception in on_message: invalid literal for int() with base 10: "b'2'"
+2020-03-08 15:09:28,092 - ShellyMqttAdapter - INFO - Connect to MqTT Broker
+2020-03-08 15:09:28,095 - ShellyMqttAdapter - INFO - Subscribed: 1 (0,)
+2020-03-08 15:09:28,096 - ShellyMqttAdapter - INFO - Subscribed: 2 (0,)
+2020-03-08 15:09:49,707 - ShellyMqttAdapter - ERROR - Caught exception in on_message: invalid literal for int() with base 10: '0.00'
+2020-03-08 15:14:00,099 - ShellyMqttAdapter - INFO - Connect to MqTT Broker
+2020-03-08 15:14:00,103 - ShellyMqttAdapter - INFO - Subscribed: 1 (0,)
+2020-03-08 15:14:00,104 - ShellyMqttAdapter - INFO - Subscribed: 2 (0,)
+2020-03-08 15:14:04,105 - ShellyMqttAdapter - INFO - Connect to MqTT Broker
+2020-03-08 15:14:04,112 - ShellyMqttAdapter - INFO - Subscribed: 1 (0,)
+2020-03-08 15:14:04,113 - ShellyMqttAdapter - INFO - Subscribed: 2 (0,)
+2020-03-08 15:14:38,143 - ShellyMqttAdapter - ERROR - Caught exception in on_message: invalid literal for int() with base 10: '0.00'
+2020-03-08 15:16:33,307 - ShellyMqttAdapter - INFO - Connect to MqTT Broker
+2020-03-08 15:16:33,312 - ShellyMqttAdapter - INFO - Subscribed: 1 (0,)
+2020-03-08 15:16:33,313 - ShellyMqttAdapter - INFO - Subscribed: 2 (0,)
+2020-03-08 15:17:19,777 - ShellyMqttAdapter - ERROR - Caught exception in on_message: invalid literal for int() with base 10: '0.00'
+2020-03-08 15:18:51,838 - ShellyMqttAdapter - INFO - Connect to MqTT Broker
+2020-03-08 15:18:51,841 - ShellyMqttAdapter - INFO - Subscribed: 1 (0,)
+2020-03-08 15:18:51,841 - ShellyMqttAdapter - INFO - Subscribed: 2 (0,)
+2020-03-08 15:25:02,902 - ShellyMqttAdapter - INFO - Connect to MqTT Broker
+2020-03-08 15:25:02,905 - ShellyMqttAdapter - INFO - Subscribed: 1 (0,)
+2020-03-08 15:25:02,906 - ShellyMqttAdapter - INFO - Subscribed: 2 (0,)

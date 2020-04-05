@@ -32,7 +32,7 @@ function getLatestSeries($pdo){
 
 function getSeriesForLogger($pdo, $dbIdDatalogger)
 {
-    $sql = "SELECT dbId, dbIdDatalogger, Name, Startdatum FROM Series WHERE dbIdDatalogger = " . $dbIdDatalogger." ORDER BY Startdatum DESC";
+    $sql = "SELECT dbId, dbIdDatalogger, Name, Startdatum FROM Series WHERE dbIdDatalogger = " . $dbIdDatalogger;
     $result = $pdo->prepare($sql);
     $result->execute();
 
