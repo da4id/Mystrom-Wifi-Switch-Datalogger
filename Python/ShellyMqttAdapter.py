@@ -17,11 +17,21 @@ class ShellyMqttAdapter(MqttReceiver):
 
         self.lastEnergy = None
         self.lastPower = None
+        self.dbIdSeries = None
+        self.dbIdTestDevice = None
+
+        self.isFirstMeasurment = True
+        self.lastLoggedEnergy = 0
 
     def checkAndLog(self):
         if self.lastEnergy is not None and self.lastPower is not None:
             try:
                 dbConnection = DbConnection()
+                if self.isFirstMeasurment or self.lastLoggedEnergy > self.lastEnergy:
+                    self.dbIdSeries = dbConnection.createNewSeries(self.dbIdTestDevice)
+                    self.logger.info("Create New Series dbId %s after Shelly Reboot" % self.dbIdSeries)
+                self.isFirstMeasurment = False
+                self.lastLoggedEnergy = self.lastEnergy
                 dbConnection.createMeasurement(self.dbIdSeries, self.lastPower, self.lastEnergy, 1)
                 dbConnection.close()
             except Exception as e:
@@ -30,7 +40,7 @@ class ShellyMqttAdapter(MqttReceiver):
             self.lastEnergy = None
 
     def on_message(self, mqttc, obj, msg):
-        self.logger.debug(msg.topic + " " + str(msg.qos) + " " + str(msg.payload))
+        self.logger.info(msg.topic + " " + str(msg.qos) + " " + str(msg.payload))
         payload = msg.payload.decode("utf-8")
         if msg.topic == self.dataloggerDataTopic:
             self.lastPower = Decimal(payload)
@@ -41,10 +51,7 @@ class ShellyMqttAdapter(MqttReceiver):
     def run(self, username, password, server, port, powerTopic, energyTopic, deviceName):
         dbConnection = DbConnection()
         self.dbIdTestDevice = dbConnection.findDataloggerDbIdByName(deviceName)
-        print("Device dbId", self.dbIdTestDevice)
-
-        self.dbIdSeries = dbConnection.createNewSeries(self.dbIdTestDevice)
-        print("Series dbId", self.dbIdSeries)
+        self.logger.info("Device dbId %s" % self.dbIdTestDevice)
 
         dbConnection.close()
 

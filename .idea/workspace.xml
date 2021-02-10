@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="71e5a729-cf59-4230-b3a0-e138f8a85a1c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Php/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Php/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Php/.fuse_hidden000001d000000001" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/ShellyMqttAdapter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/ShellyMqttAdapter.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

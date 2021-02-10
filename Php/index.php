@@ -48,8 +48,6 @@ if(!isset($_GET)){
         $dbIdSeries = $series[0]["dbId"];
     }
 }
-
-$data = getData($pdo,$dbIdSeries);
 $lastEntry = getLastEntry($pdo,$dbIdSeries);
 
 ?>
@@ -76,75 +74,63 @@ $lastEntry = getLastEntry($pdo,$dbIdSeries);
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/bootstrap-datepicker.min.js"></script>
+    <script src="js/jquery.min.js"></script>
 
     <!-- Resources -->
-    <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
-    <script src="https://www.amcharts.com/lib/3/serial.js"></script>
-    <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
-    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all"/>
-    <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+    <!-- Resources -->
+    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
 
     <!-- Chart code -->
-    <script type="text/javascript">
-        var chartData = 
-        <?php
-            printData($data);
-        ?>;
+    <!-- Chart code -->
+    <script>
+        am4core.ready(function() {
 
-        var powerChart = AmCharts.makeChart("PowerChartDiv", {
-            "type": "serial",
-            "theme": "light",
-            "marginRight": 80,
-            "dataProvider": chartData,
-            "valueAxes": [{
-                "position": "left",
-                "title": "power"
-            }],
-            "graphs": [{
-                "id": "g1",
-                "fillAlphas": 0.4,
-                "valueField": "power",
-                "balloonText": "<div style='margin:5px; font-size:19px;'>Momentanleistung:<b>[[value]]W</b></div>"
-            }],
-            "chartScrollbar": {
-                "graph": "g1",
-                "scrollbarHeight": 80,
-                "backgroundAlpha": 0,
-                "selectedBackgroundAlpha": 0.1,
-                "selectedBackgroundColor": "#888888",
-                "graphFillAlpha": 0,
-                "graphLineAlpha": 0.5,
-                "selectedGraphFillAlpha": 0,
-                "selectedGraphLineAlpha": 1,
-                "autoGridCount": true,
-                "color": "#AAAAAA"
-            },
-            "chartCursor": {
-                "categoryBalloonDateFormat": "JJ:NN, DD MMMM",
-                "cursorPosition": "mouse"
-            },
-            "categoryField": "date",
-            "categoryAxis": {
-                "minPeriod": "mm",
-                "parseDates": true
-            },
-            "export": {
-                "enabled": true,
-                "dateFormat": "YYYY-MM-DD HH:NN:SS"
+        // Themes begin
+        am4core.useTheme(am4themes_animated);
+        // Themes end
+
+        // Create chart instance
+        var chart = am4core.create("PowerChartDiv", am4charts.XYChart);
+
+        // Add data
+        //chart.data = generateChartData();
+
+        // Create axes
+        var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+        dateAxis.renderer.minGridDistance = 50;
+
+        var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+
+        // Create series
+        var series = chart.series.push(new am4charts.LineSeries());
+        series.dataFields.valueY = "power";
+        series.dataFields.dateX = "date";
+        series.strokeWidth = 2;
+        series.minBulletDistance = 10;
+        series.tooltipText = "Momentanleistung: {power}W";
+        series.tooltip.pointerOrientation = "vertical";
+
+        // Add scrollbar
+        chart.scrollbarX = new am4charts.XYChartScrollbar();
+        chart.scrollbarX.series.push(series);
+
+        // Add cursor
+        chart.cursor = new am4charts.XYCursor();
+        chart.cursor.xAxis = dateAxis;
+        chart.cursor.snapToSeries = series;
+
+        $.get("<?php echo 'data.php?datalogger='.$loggerId.'&series='.$dbIdSeries; ?>", data => {
+            for (var d of data) {
+                d.date = new Date(d.date)
             }
-        });
+		    chart.data = data;
 
-        powerChart.addListener("dataUpdated", zoomPowerChart);
-        // when we apply theme, the dataUpdated event is fired even before we add listener, so
-        // we need to call zoomChart here
-        zoomPowerChart();
+		});
 
-        // this method is called when chart is first inited as we listen for "dataUpdated" event
-        function zoomPowerChart() {
-            // different zoom methods can be used - zoomToIndexes, zoomToDates, zoomToCategoryValues
-            powerChart.zoomToIndexes(0, chartData.length - 1);
-        }
-    </script>
+        }); // end am4core.ready()
+    </script>  
 
     <title>myStrom Switch Logdaten</title>
 </head>
