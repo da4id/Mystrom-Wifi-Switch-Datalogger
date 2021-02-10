@@ -69,7 +69,7 @@ $lastEntry = getLastEntry($pdo,$dbIdSeries);
             width   : 100%;
             height  : 500px;
         }
-    </style>;
+    </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -101,6 +101,10 @@ $lastEntry = getLastEntry($pdo,$dbIdSeries);
         var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
         dateAxis.renderer.minGridDistance = 50;
 
+        // this makes the data to be grouped
+        dateAxis.groupData = true;
+        dateAxis.groupCount = 200;
+
         var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
 
         // Create series
@@ -127,12 +131,16 @@ $lastEntry = getLastEntry($pdo,$dbIdSeries);
             }
 		    chart.data = data;
 
+            chart.events.on("ready", function () {
+              dateAxis.zoomToDates(new Date(data[data.length-1].date-24*60*60*1000),data[data.length-1].date);
+            });
 		});
 
         }); // end am4core.ready()
     </script>  
 
     <title>myStrom Switch Logdaten</title>
+
 </head>
 <body>
 <nav class="navbar navbar-inverse">
